@@ -1,7 +1,8 @@
 ARG BUILD_FROM
 FROM $BUILD_FROM
 LABEL io.hass.version="1.11.5" io.hass.type="addon" io.hass.arch="armv7|armhf|aarch64|i386|amd64"
-RUN apt-get update && apt-get upgrade -y && \
+RUN echo "Acquire::Check-Valid-Time \"false\";" > /etc/apt/apt.conf.d/99no-check-valid-time && \
+    apt-get update && apt-get upgrade -y && \
     apt-get install --no-install-recommends -y build-essential bluez python3-pip python3-dev && \
     pip3 install --extra-index-url=https://www.piwheels.org/simple TheengsGateway==1.7.5
 ENV current /root
